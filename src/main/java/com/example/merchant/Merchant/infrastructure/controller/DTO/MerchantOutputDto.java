@@ -1,5 +1,13 @@
 package com.example.merchant.Merchant.infrastructure.controller.DTO;
 
+
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class MerchantOutputDto {
 
     private String id;

@@ -2,6 +2,7 @@ package com.example.merchant.Merchant.domain.mappers;
 
 
 import com.example.merchant.Merchant.aplication.MerchantModel;
+import com.example.merchant.Merchant.infrastructure.controller.DTO.MerchantInputDto;
 import com.example.merchant.Merchant.infrastructure.controller.DTO.MerchantOutputDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -13,9 +14,10 @@ import java.util.Date;
 @Mapper(componentModel = "spring")
 public interface MerchantDtoMapper {
 
-    MerchantModel toModel(MerchantOutputDto dto);
+    MerchantModel toModel(MerchantInputDto dto);
 
-    @Mapping(source = "createdDate", target = "C" )
+    @Mapping(source = "createdDate", target = "createdDate", qualifiedByName = "dateToString")
+    MerchantOutputDto toOutputDto(MerchantModel model);
 
 
     @Named("dateToString")
