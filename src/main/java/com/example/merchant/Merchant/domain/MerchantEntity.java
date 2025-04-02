@@ -1,36 +1,39 @@
 package com.example.merchant.Merchant.domain;
 
-
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConvertedEnum;
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import com.example.merchant.Merchant.domain.enums.MerchantType;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MerchantEntity extends  MainTable {
+@ApiModel(description = "Entidad que representa un comercio (merchant)")
+public class MerchantEntity extends MainTable {
 
+    @ApiModelProperty(value = "Nombre del comercio")
     @DynamoDBAttribute(attributeName = "name")
-    private  String name;
+    private String name;
 
+    @ApiModelProperty(value = "Dirección del comercio")
     @DynamoDBAttribute(attributeName = "address")
-    private  String address;
+    private String address;
+
+    @ApiModelProperty(value = "Tipo de comercio", example = "MERCHANT_TYPE_PERSONAL_SERVICES")
     @DynamoDBTypeConvertedEnum
     @DynamoDBAttribute(attributeName = "merchantType")
     private MerchantType merchantType;
 
+    @ApiModelProperty(value = "ID del cliente asociado a este comercio")
     @DynamoDBAttribute(attributeName = "clientId")
-    private  String clientId;
+    private String clientId;
 
+    @ApiModelProperty(value = "Nombre del comercio normalizado para búsqueda")
     @DynamoDBAttribute(attributeName = "normalizedName")
     private String normalizedName;
+
     public void iniciarCampos() {
         this.inicializarBase("Merchant");
     }
@@ -47,4 +50,3 @@ public class MerchantEntity extends  MainTable {
         return super.getSK();
     }
 }
-
